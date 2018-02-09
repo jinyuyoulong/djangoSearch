@@ -1,3 +1,4 @@
+import markdown
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Post, Tag
@@ -12,4 +13,5 @@ def index(request):
 
 def detail(request, pk):
 	post=get_object_or_404(Post, pk=pk)
+	post.body = markdown.markdown(post.body,['extra','codehilite','toc',])
 	return render(request, 'myapp/detail.html',{'post':post})
