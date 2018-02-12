@@ -7,4 +7,5 @@ urlpatterns = [
 	# myapp/post/id
 	path('post/<int:pk>/', views.detail, name='detail'),
 	path('P<pk>[0-9]/$', views.detail, name='detail'),
+	path('archives/<year>/<month>/', views.archives, name='archives'),
 ]

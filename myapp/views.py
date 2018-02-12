@@ -15,3 +15,8 @@ def detail(request, pk):
 	post=get_object_or_404(Post, pk=pk)
 	post.body = markdown.markdown(post.body,['extra','codehilite','toc',])
 	return render(request, 'myapp/detail.html',{'post':post})
+
+def archives(request, year, month):
+	post_list = Post.objects.filter(created_time__year=year,
+		created_time__month = month).order_by('-created_time')
+	return render(request, 'myapp/index.html', context={'post_list':post_list})
